@@ -42,11 +42,13 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install Sonar Scanner
+    - name: Download and extract SonarScanner
       run: |
         curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-        unzip sonar-scanner.zip
-        mv sonar-scanner-4.7.0.2747-linux sonar-scanner
+        unzip -q sonar-scanner.zip -d sonar-scanner
+
+    - name: Set up SonarScanner
+      run: |
         export PATH="$PATH:$(pwd)/sonar-scanner/bin"
 
     - name: Run SonarQube Scan
@@ -58,6 +60,4 @@ jobs:
         sonar-scanner \
           -Dsonar.projectKey=desarrollo-de-software-ii \
           -Dsonar.organization=Desarrollo_de_Software_II \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=$SONAR_TOKEN
+          -Dsonar.sources=.
