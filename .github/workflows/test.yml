@@ -47,17 +47,14 @@ jobs:
         curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
         unzip sonar-scanner.zip
         mv sonar-scanner-4.7.0.2747-linux sonar-scanner
+        echo "Adding SonarScanner to PATH"
         export PATH="$PATH:$(pwd)/sonar-scanner/bin"
 
     - name: Run SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64  # Ensure JAVA_HOME points to JDK 17
-        PATH: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64/bin:$PATH  # Ensure PATH includes JDK 17 bin
       run: |
-        ./sonar-scanner/bin/sonar-scanner \
+        sonar-scanner \
           -Dsonar.projectKey=desarrollo-de-software-ii \
           -Dsonar.organization=Desarrollo_de_Software_II \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=$SONAR_TOKEN
+          -Dsonar.sources=.
