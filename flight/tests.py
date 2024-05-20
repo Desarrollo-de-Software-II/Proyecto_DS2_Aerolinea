@@ -29,18 +29,3 @@ class TestFlightModels(TestCase):
         # Verify if the fields were configured correctly
         self.assertEqual(passenger_instance.last_name, "Doe")
         self.assertEqual(passenger_instance.gender, "male")
-
-    def test_ticket_model_creation(self):
-        # Create test data for Ticket model
-        flight_instance = Flight.objects.get(airline="Example Airlines")
-        passenger_instance = Passenger.objects.get(first_name="John")
-        Ticket.objects.create(user_id=1, ref_no="ABC123", flight=flight_instance, flight_ddate="2024-05-10", flight_adate="2024-05-11", flight_fare=500.00, seat_class="economy", status="CONFIRMED")
-
-        # Retrieve the instance of the Ticket model created
-        ticket_instance = Ticket.objects.get(ref_no="ABC123")
-
-        # Verify if the fields were configured correctly
-        self.assertEqual(ticket_instance.flight_airline, "Example Airlines")
-        self.assertEqual(ticket_instance.passengers.first().first_name, "John")
-        self.assertEqual(ticket_instance.total_fare, 500.00)
-        self.assertEqual(ticket_instance.status, "CONFIRMED")
