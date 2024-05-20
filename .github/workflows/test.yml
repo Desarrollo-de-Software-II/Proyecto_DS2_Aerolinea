@@ -55,10 +55,11 @@ jobs:
     - name: Run SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64  # Ensure JAVA_HOME points to JDK 17
-        PATH: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64/bin:$PATH  # Ensure PATH includes JDK 17 bin
+        JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64  # Asegúrate de que apunte a tu versión de Java
+        PATH: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64/bin:$PATH  # Asegúrate de incluir el directorio bin de tu JDK en la ruta
       run: |
-        sonar-scanner \
-          -Dsonar.projectKey=desarrollo-de-software-ii \
-          -Dsonar.organization=Desarrollo_de_Software_II \
-          -Dsonar.sources=.
+        ./sonar-scanner/bin/sonar-scanner \
+        -Dsonar.projectKey=desarrollo-de-software-ii \
+        -Dsonar.organization=Desarrollo_de_Software_II \
+        -Dsonar.sources=.
+
