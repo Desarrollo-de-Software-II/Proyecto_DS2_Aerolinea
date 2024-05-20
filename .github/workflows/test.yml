@@ -44,11 +44,10 @@ jobs:
 
     - name: Install Sonar Scanner
       run: |
-        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-        unzip sonar-scanner.zip
-        mv sonar-scanner-4.7.0.2747-linux sonar-scanner
-        echo "Adding SonarScanner to PATH"
-        export PATH="$PATH:$(pwd)/sonar-scanner/bin"
+        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+        unzip sonar-scanner-cli-4.8.0.2856-linux.zip
+        sudo mv sonar-scanner-cli-4.8.0.2856-linux /opt/sonar-scanner
+        ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 
     - name: Run SonarQube Scan
       env:
