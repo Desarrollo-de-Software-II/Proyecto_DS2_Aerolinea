@@ -6,11 +6,6 @@ on:
       - main
       - features/KevinVelez
 
-  pull_request:
-    branches:
-      - main
-      - features/KevinVelez
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -45,13 +40,14 @@ jobs:
       run: |
         curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
         unzip sonar-scanner.zip
-        export PATH="$PATH:$(pwd)/sonar-scanner-4.7.0.2747-linux/bin"
+        mv sonar-scanner-4.7.0.2747-linux sonar-scanner
+        export PATH="$PATH:$(pwd)/sonar-scanner/bin"
     
     - name: Run SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        sonar-scanner \
+        ./sonar-scanner/bin/sonar-scanner \
           -Dsonar.projectKey=desarrollo-de-software-ii \
           -Dsonar.organization=Desarrollo_de_Software_II \
           -Dsonar.sources=. \
