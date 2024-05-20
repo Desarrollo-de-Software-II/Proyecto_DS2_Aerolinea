@@ -42,18 +42,21 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Install Docker
+      uses: docker/setup-buildx-action@v1
+
+    - name: Start SonarQube container
+      run: |
+        docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
+
+    - name: Wait for SonarQube to start
+      run: |
+        while ! nc -z localhost 9000; do sleep 1; done
+
     - name: Install Sonar Scanner
       run: |
-        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-        unzip sonar-scanner-cli-4.8.0.2856-linux.zip
-        sudo mv sonar-scanner-cli-4.8.0.2856-linux /opt/sonar-scanner
-        ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+        docker run --rm -e SONAR_HOST_URL=http://localhost:9000 sonarsource/sonar-scanner-cli -Dsonar.projectKey=desarrollo-de-software-ii -Dsonar.organization=Desarrollo_de_Software_II -Dsonar.sources=.
 
-    - name: Run SonarQube Scan
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Stop SonarQube container
       run: |
-        sonar-scanner \
-          -Dsonar.projectKey=desarrollo-de-software-ii \
-          -Dsonar.organization=Desarrollo_de_Software_II \
-          -Dsonar.sources=.
+        docker stop sonarqube
