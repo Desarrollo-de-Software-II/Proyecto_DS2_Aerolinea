@@ -1,12 +1,7 @@
 name: Django CI
 
 on:
-  push:
-    branches:
-      - main
-      - features/KevinVelez
-
-  pull_request:
+  pull request:
     branches:
       - main
       - features/KevinVelez
@@ -40,3 +35,9 @@ jobs:
     - name: Run tests
       run: |
         yes | python manage.py test
+
+    - name: Sonar Cloud
+      uses: sonarsource/sonarcloud-github-actions@v2
+      env: 
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
