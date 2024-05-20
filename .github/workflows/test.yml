@@ -6,6 +6,11 @@ on:
       - main
       - features/KevinVelez
 
+  pull_request:
+    branches:
+      - main
+      - features/KevinVelez
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -48,10 +53,11 @@ jobs:
         unzip sonar-scanner.zip
         mv sonar-scanner-4.7.0.2747-linux sonar-scanner
         export PATH="$PATH:$(pwd)/sonar-scanner/bin"
-    
+
     - name: Run SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17/x64  # Ensure JAVA_HOME points to JDK 17
       run: |
         ./sonar-scanner/bin/sonar-scanner \
           -Dsonar.projectKey=desarrollo-de-software-ii \
