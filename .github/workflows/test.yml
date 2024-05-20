@@ -49,6 +49,7 @@ jobs:
 
     - name: Set up SonarScanner
       run: |
+        echo "Adding SonarScanner to PATH"
         export PATH="$PATH:$(pwd)/sonar-scanner/bin"
 
     - name: Run SonarQube Scan
