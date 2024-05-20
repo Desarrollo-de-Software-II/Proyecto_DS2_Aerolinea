@@ -3,7 +3,8 @@ name: Django CI
 on:
   push:
     branches:
-      -main
+      - main
+      - features/KevinVelez
 
   pull_request:
     branches:
