@@ -1,7 +1,7 @@
 name: Django CI
 
 on:
-  push:
+  pull request:
     branches:
       - main
       - features/KevinVelez
@@ -36,27 +36,8 @@ jobs:
       run: |
         yes | python manage.py test
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    - name: Install Docker
-      uses: docker/setup-buildx-action@v1
-
-    - name: Start SonarQube container
-      run: |
-        docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
-
-    - name: Wait for SonarQube to start
-      run: |
-        while ! nc -z localhost 9000; do sleep 1; done
-
-    - name: Install Sonar Scanner
-      run: |
-        docker run --rm -e SONAR_HOST_URL=https://sonarcloud.io sonarsource/sonar-scanner-cli -Dsonar.projectKey=desarrollo-de-software-ii -Dsonar.organization=desarrollo-de-software-ii -Dsonar.sources=.
-
-    - name: Stop SonarQube container
-      run: |
-        docker stop sonarqube
+    - name: Sonar Cloud
+      uses: sonarsource/sonarcloud-github-actions@v2
+      env: 
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
