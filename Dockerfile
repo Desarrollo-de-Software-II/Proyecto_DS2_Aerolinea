@@ -18,7 +18,7 @@ WORKDIR /app
 COPY requirements.txt /app/
 
 # Instala las dependencias de Python
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip -m install -r requirements.txt
 
 # Copia el código del proyecto
 COPY . /app/
@@ -26,7 +26,6 @@ COPY . /app/
 # Ejecuta las migraciones y colecta los archivos estáticos
 RUN python manage.py makemigrations
 RUN python manage.py migrate
-RUN python manage.py collectstatic --noinput
 
 # Expone el puerto que usará la aplicación
 EXPOSE 8000
