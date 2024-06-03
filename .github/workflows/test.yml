@@ -43,6 +43,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.organization=Desarrollo_de_Software_II
-          -Dsonar.projectKey=desarrollo-de-software-ii
+          -Dsonar.organization=desarrollo-de-software-ii
+          -Dsonar.projectKey=Proyecto_DS2_Aerolinea
           -Dsonar.python.coverage.reportPaths=coverage.xml
