@@ -37,13 +37,6 @@
   - `requirements.txt` - This file contains all contains all the python packages that needs to be installed to run this web application.
   - `manage.py` - This file is used basically as a command-line utility and for deploying, debugging, or running our web application.
 
-### Justification
-
-1. Mobile responsive webpages.
-2. More complex models.
-3. More interatactive because webpages use ajax functionality (eg., fetch) written in javascript.
-4. Converts html template to downloadable pdf.
-
 ### Installation
 
 - Install project dependencies by running `py -m pip install -r requirements.txt`.
