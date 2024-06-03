@@ -33,5 +33,7 @@ RUN python manage.py collectstatic --noinput
 # Expone el puerto que usará la aplicación
 EXPOSE 8000
 
-# Comando para ejecutar la aplicación
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Comando para ejecutar la aplicación localmente
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Comando para ejecutar la aplicación en producción
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "capstone.wsgi:application"]
