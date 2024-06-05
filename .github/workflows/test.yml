@@ -30,14 +30,20 @@ jobs:
     - name: Run makemigrations
       run: |
         python manage.py makemigrations --settings=capstone.settings.production
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
     
     - name: Run migrations
       run: |
         python manage.py migrate --settings=capstone.settings.production
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     - name: Run tests
       run: |
         yes | python manage.py test --settings=capstone.settings.production
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
   sonarcloud:
     name: SonarCloud
