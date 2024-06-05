@@ -30,4 +30,4 @@ COPY . /app/
 RUN chmod +x /app/entrypoint.sh
 
 # Comando para ejecutar la aplicación en producción
-CMD ["/app/entrypoint.sh"]
+CMD ["sh", "entrypoint.sh"]

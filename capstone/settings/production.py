@@ -1,7 +1,7 @@
-from capstone.settings.base import *
-from dotenv import load_dotenv
-from capstone.logging import *
 import os
+from ..logging import *
+from .base import *
+from dotenv import load_dotenv
 
 load_dotenv(Path.joinpath(BASE_DIR, '.env'))
 
