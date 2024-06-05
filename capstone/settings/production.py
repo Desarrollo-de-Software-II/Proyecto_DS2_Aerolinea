@@ -12,7 +12,7 @@ load_dotenv(dotenv_path)
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = ['proyectods2aerolinea.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['proyectods2aerolinea.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://proyectods2aerolinea.up.railway.app']
 
 # Otras configuraciones
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
