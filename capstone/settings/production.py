@@ -3,10 +3,12 @@ from ..logging import *
 from .base import *
 from dotenv import load_dotenv
 
-load_dotenv(Path.joinpath(BASE_DIR, '.env'))
+# Cargar el archivo .env si existe
+dotenv_path = Path.joinpath(BASE_DIR, '.env')
+load_dotenv(dotenv_path)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
