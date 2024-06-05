@@ -29,15 +29,15 @@ jobs:
 
     - name: Run makemigrations
       run: |
-        python manage.py makemigrations
+        python manage.py makemigrations --settings=capstone.settings.production
     
     - name: Run migrations
       run: |
-        python manage.py migrate
+        python manage.py migrate --settings=capstone.settings.production
 
     - name: Run tests
       run: |
-        yes | python manage.py test
+        yes | python manage.py test --settings=capstone.settings.production
 
   sonarcloud:
     name: SonarCloud
