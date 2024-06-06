@@ -18,6 +18,13 @@ RUN apt-get update && apt-get install -y \
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./ ./
-
+COPY ./requirements.txt ./
+COPY ./capstone ./
+COPY ./Data ./
+COPY ./flight ./
+COPY ./db.sqlite3 ./
+COPY ./Dockerfile ./
+COPY ./entrypoint.sh ./
+COPY ./manage.py ./
+COPY ./sonar-project.properties ./
 CMD ["sh", "entrypoint.sh"]
