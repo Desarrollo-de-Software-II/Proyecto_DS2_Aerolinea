@@ -19,9 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Crea un grupo y usuario no privilegiados
-RUN addgroup --system nonroot && adduser --system --ingroup nonroot nonroot
-
 # Copia los archivos de requerimientos y los instala
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
@@ -35,9 +32,6 @@ COPY ./Dockerfile ./
 COPY ./entrypoint.sh ./
 COPY ./manage.py ./
 COPY ./sonar-project.properties ./
-
-# Cambia al usuario no privilegiado
-USER nonroot
 
 # Define el comando por defecto
 CMD ["sh", "entrypoint.sh"]
