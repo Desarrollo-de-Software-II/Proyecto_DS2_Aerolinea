@@ -1,5 +1,5 @@
 import os
-from ..logging import *
+from ..app_logging import *
 from .base import *
 from dotenv import load_dotenv
 from pathlib import Path
