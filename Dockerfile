@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Instala dependencias del sistema sin recomendaciones adicionales
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     libcairo2 \
     libcairo2-dev \
     pkg-config \
