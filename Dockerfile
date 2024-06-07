@@ -1,10 +1,14 @@
+# Usa la imagen base de Python
 FROM python:3.9-slim
 
+# Define variables de entorno
 ENV PYTHONUNBUFFERED=1
 
+# Establece el directorio de trabajo
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+# Instala dependencias del sistema sin recomendaciones adicionales
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2 \
     libcairo2-dev \
     pkg-config \
@@ -15,9 +19,25 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Crea un grupo y usuario no privilegiados
+RUN addgroup --system nonroot && adduser --system --ingroup nonroot nonroot
+
+# Copia los archivos de requerimientos y los instala
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./ ./
+# Copia los archivos del proyecto
+COPY ./capstone ./
+COPY ./Data ./
+COPY ./flight ./
+COPY ./db.sqlite3 ./
+COPY ./Dockerfile ./
+COPY ./entrypoint.sh ./
+COPY ./manage.py ./
+COPY ./sonar-project.properties ./
 
+# Cambia al usuario no privilegiado
+USER nonroot
+
+# Define el comando por defecto
 CMD ["sh", "entrypoint.sh"]
