@@ -24,14 +24,7 @@ COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia los archivos del proyecto
-COPY ./capstone ./
-COPY ./Data ./
-COPY ./flight ./
-COPY ./db.sqlite3 ./
-COPY ./Dockerfile ./
-COPY ./entrypoint.sh ./
-COPY ./manage.py ./
-COPY ./sonar-project.properties ./
+COPY ./ ./
 
 # Define el comando por defecto
 CMD ["sh", "entrypoint.sh"]
